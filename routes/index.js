@@ -27,8 +27,32 @@ router.get('/', function (req, res, next) {
 
 
 var Canvas = require('canvas');
+var node_echarts = require('node-echarts');
 
 router.get('/canvas', function (req, res, next) {
+  node_echarts({
+    width: 500, // Image width, type is number.
+    height: 500, // Image height, type is number.
+    option: {
+      xAxis: {
+        type: "category",
+        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+      },
+      yAxis: {
+        type: "value"
+      },
+      series: [{
+        animation: false,
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: "line",
+        animationDelay: function (idx) {
+          return 0;
+        }
+      }]
+    }, // Echarts configuration, type is Object.
+    //If the path  is not set, return the Buffer of image.
+    path:__dirname + '/demo.png', // Path is filepath of the image which will be created.
+  })
   var Image = Canvas.Image,
     canvas = new Canvas(200, 200),
     ctx = canvas.getContext('2d');
