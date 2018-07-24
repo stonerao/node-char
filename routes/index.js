@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 
 
 var Canvas = require('canvas');
-// var node_echarts = require('node-echarts');
+var node_echarts = require('node-echarts');
 
 router.get('/canvas', function (req, res, next) {
   /* node_echarts({
