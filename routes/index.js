@@ -24,20 +24,43 @@ router.get('/', function (req, res, next) {
   });
 
 });
+
+
+var Canvas = require('canvas');
+
+router.get('/canvas', function (req, res, next) {
+  var Image = Canvas.Image,
+    canvas = new Canvas(200, 200),
+    ctx = canvas.getContext('2d');
+
+  ctx.font = '30px Impact';
+  ctx.rotate(.1);
+  ctx.fillText("Awesome!", 50, 100);
+
+  var te = ctx.measureText('Awesome!');
+  ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+  ctx.beginPath();
+  ctx.lineTo(50, 102);
+  ctx.lineTo(50 + te.width, 102);
+  ctx.stroke();
+  res.send('<img src="' + canvas.toDataURL() + '" />')
+
+});
+
 router.get('/chart', function (req, res, next) {
   driver.get("http://localhost:3000/")
   driver.sleep(1 * 1000).then(function (rr) {
     // res.send(JSON.stringify(driver.findElement(By.id('cc'))).toString())
     // res.send(driver.findElement(By.id('cc')))
     // var body = driver.findElement()
-  /*   By.id("canvas").getAttribute("style").then(b => {
+    /*   By.id("canvas").getAttribute("style").then(b => {
 
 
-    }) */
+      }) */
     /*  driver.findElement(By.id('cc')).getPageSource().then(b => {
       
-     }); */ 
-      driver.getPageSource().then(function (souce) { 
+     }); */
+    driver.getPageSource().then(function (souce) {
       let $ = cheerio.load(souce);
       // console.log($("cc"))
       res.send($("#cc").html())
