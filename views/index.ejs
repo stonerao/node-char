@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src='/javascripts/echarts.min.js'></script>
+  <script src='/javascripts/jquery-3.3.1.min.js'></script>
+</head>
+
+<body>
+  <div>
+    <div id="canvas">
+
+    </div>
+    <div id="cc">
+        <h1>1</h1>
+        <img src="" alt="" id="img">
+    </div>
+    
+  </div>
+  <script>
+    window.onload = function () {
+      let canvas = document.getElementById("canvas");
+      let img = document.getElementById("img");
+      var myChart = echarts.init(canvas);
+      var option = {
+        xAxis: {
+          type: "category",
+          data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        },
+        yAxis: {
+          type: "value"
+        },
+        series: [{
+          animation: false,
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: "line",
+          animationDelay: function (idx) {
+            return 0;
+          }
+        }]
+      }
+
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+      var src = myChart.getConnectedDataURL();
+      img.src = src;
+    }
+  </script>
+</body>
+<style>
+  #canvas {
+    height: 500px;
+    width: 800px;
+    display: none;
+  }
+</style>
+
+</html>
