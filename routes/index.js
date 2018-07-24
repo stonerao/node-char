@@ -27,10 +27,10 @@ router.get('/', function (req, res, next) {
 
 
 var Canvas = require('canvas');
-var node_echarts = require('node-echarts');
+// var node_echarts = require('node-echarts');
 
 router.get('/canvas', function (req, res, next) {
-  node_echarts({
+  /* node_echarts({
     width: 500, // Image width, type is number.
     height: 500, // Image height, type is number.
     option: {
@@ -51,8 +51,8 @@ router.get('/canvas', function (req, res, next) {
       }]
     }, // Echarts configuration, type is Object.
     //If the path  is not set, return the Buffer of image.
-    // path:__dirname + '/demo.png', // Path is filepath of the image which will be created.
-  })
+    path:__dirname + '/demo.png', // Path is filepath of the image which will be created.
+  }) */
   var Image = Canvas.Image,
     canvas = new Canvas(200, 200),
     ctx = canvas.getContext('2d');
