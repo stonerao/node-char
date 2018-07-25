@@ -6,8 +6,9 @@
     <%= title %>
   </title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
-  <script src='/javascripts/echarts.min.js'></script>
+  <!-- <script src='/javascripts/echarts.min.js'></script> -->
   <script src='/javascripts/jquery-3.3.1.min.js'></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 
 <body>
@@ -23,7 +24,7 @@
   </div>
   <script>
     window.onload = function () {
-      let canvas = document.getElementById("canvas");
+     /*  let canvas = document.getElementById("canvas");
       let img = document.getElementById("img");
       var myChart = echarts.init(canvas);
       var option = {
@@ -47,7 +48,7 @@
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
       var src = myChart.getConnectedDataURL();
-      img.src = src;
+      img.src = src; */
     }
   </script>
 </body>
