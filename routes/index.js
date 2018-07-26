@@ -37,41 +37,36 @@ var jsdom = require('jsdom');
 const {
   JSDOM
 } = jsdom;
-var phantom = require('phantom');
-var num = 1;
+var phantom = require('phantom'); 
 //生成PDF报表
 router.get('/canvas', function (req, res, next) {
+  //开始执行
   phantom.create().then(function (ph) {
+    //创建一个PDF
     ph.createPage().then(function (page) {
-      page.open("http://localhost:3000/chart").then(function (status) {
+      //打开需要读取页面
+      page.open("http://localhost:3000/chart").then(function (status) {  
         page.property('viewportSize', {
           width: 595,
           height: 500
         });
+        //设置页面为A4大小
         page.property('paperSize', {
           format: 'A4',
         });
+        //保存对应位置
         var url = __dirname + '/' + (+new Date) + 'pdf.pdf'
+        //开始渲染并且保存
         page.render(url).then(function () {
-          num++;
-          console.log('Page rendered');
+          //保存成功
           ph.exit();
-          res.send(` 
-            <script>
-             
-            </script>
-          `)
+          res.send(`<script></script>`)
         });
       });
     });
-  });
-
-
-
-
-
-
+  }); 
 });
+
 //抓取该页面
 router.get('/chart', function (req, res, next) {
   const dom = new JSDOM(`<!DOCTYPE html>
@@ -94,9 +89,7 @@ router.get('/chart', function (req, res, next) {
   <h1>我是PDF4</h1>
   <svg class="svg4"></svg>
   <h1 style="position:absolute;bottom:0">我是中文，我不会乱码</h1>
-  </body>
-
-
+  </body> 
 `);
   // console.log(dom.window.document.querySelector("p").textContent);
   var rectHeight = 25;
@@ -121,8 +114,9 @@ router.get('/chart', function (req, res, next) {
     })
     .attr("height", rectHeight - 2)
     .attr("fill", "steelblue");
-    function svgs(SVG){
-      SVG.selectAll("rect")
+
+  function svgs(SVG) {
+    SVG.selectAll("rect")
       .data(dataset1)
       .enter()
       .append("rect")
@@ -135,11 +129,11 @@ router.get('/chart', function (req, res, next) {
       })
       .attr("height", rectHeight - 2)
       .attr("fill", "steelblue");
-    } 
-    svgs(svg1)
-    svgs(svg2)
-    svgs(svg3)
-    svgs(svg4)
+  }
+  svgs(svg1)
+  svgs(svg2)
+  svgs(svg3)
+  svgs(svg4)
   res.send(dom.window.document.body.innerHTML)
   /* driver.get("http://localhost:3000/")
   driver.sleep(1 * 1000).then(function (rr) {
